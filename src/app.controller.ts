@@ -1,12 +1,17 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { sample } from 'servers/sample';
+import { Observable } from 'rxjs';
+import { LogService } from './app.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly logService: LogService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getHello(): Observable<sample.HelloReply> {
+    // this.appService.getHello().forEach((val) => console.log(val));
+
+    // return 'see logs!';
+    return this.logService.getHello();
   }
 }
